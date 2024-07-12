@@ -16,7 +16,7 @@ route.get(
     async (req, res) => {
         try {
             const users = await user.find({}, "username");
-            res.json(users);
+            res.json({message:"Admin Access",token:req.headers.authorization,users});
         } catch (err) {
             res.status(500).json({
                 message: "Internal server error",
