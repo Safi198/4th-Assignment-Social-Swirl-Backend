@@ -10,10 +10,8 @@ exports.register = async (req, res) => {
 
         if (!username || !password) {
             return res
-                .json({
-                    failureMessage: "Username and Password both are required!",
-                })
-                .status(400);
+                .status(400)
+                .json({ failureMessage: "Username and Password both are required!" });
         }
 
         const existingUser = await user.findOne({ username });
@@ -29,16 +27,12 @@ exports.register = async (req, res) => {
         const validRoles = ['admin', 'user'];
         const userRole = validRoles.includes(role) ? role : 'user';
 
-        const newUser = new user({ username, password: hashPassword ,role:userRole});
+        const newUser = new user({ username, password: hashPassword, role: userRole });
         await newUser.save();
 
-        res.json({ success: "User registered successfully", newUser }).status(
-            200
-        );
+        res.status(200).json({ success: "User registered successfully", newUser });
     } catch (err) {
-        res.json({ message: "Internal server error", err: err.message }).status(
-            500
-        );
+        res.status(500).json({ message: "Internal server error", err: err.message });
     }
 };
 
@@ -48,41 +42,34 @@ exports.login = async (req, res) => {
 
         if (!username || !password) {
             return res
-                .json({ failureMessage: "Username and password are required" })
-                .status(400);
+                .status(400)
+                .json({ failureMessage: "Username and password are required" });
         }
 
         const uUser = await user.findOne({ username });
 
         if (!uUser) {
             return res
-                .json({ failureMessage: "Invalid credentials" })
-                .status(400);
+                .status(400)
+                .json({ failureMessage: "Invalid credentials" });
         }
 
         const isPasswordValid = await bCrypt.compare(password, uUser.password);
 
         if (!isPasswordValid) {
-            return res.json({ message: "Invalid credentials" }).status(400);
+            return res.status(400).json({ message: "Invalid credentials" });
         }
 
         const token = jwtoken.sign(
-<<<<<<< HEAD
             { username: uUser.username, role: uUser.role },
-=======
-            { username: uUser.username },
-<<<<<<< HEAD
->>>>>>> 2dcf43ddef1d65ef0a59d28c61467f0af5ff092a
-=======
->>>>>>> 2dcf43ddef1d65ef0a59d28c61467f0af5ff092a
             process.env.SECRET_KEY
         );
 
-        res.json({ success: "Login Successfully", token: token }).status(200);
+        res.status(200).json({ success: "Login Successfully", token: token });
     } catch (err) {
-        res.json({
+        res.status(500).json({
             message: "Internal server error",
             err: err.message,
-        }).status(500);
+        });
     }
 };
