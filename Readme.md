@@ -1,6 +1,6 @@
 # Social Swirl Backend API
 
-# Role-Based Access Control (RBAC) API
+## Role-Based Access Control (RBAC) API
 
 This project implements Role-Based Access Control (RBAC) in a Node.js API to manage different user permissions. The API is built using Node.js, Express, MongoDB, bcryptjs, and jsonwebtoken.
 
@@ -9,6 +9,7 @@ This project implements Role-Based Access Control (RBAC) in a Node.js API to man
 - User registration with roles (admin, user)
 - User login with JWT authentication
 - Protected routes accessible only to users with specific roles
+- API documentation using Swagger
 
 ## Prerequisites
 
@@ -19,8 +20,7 @@ This project implements Role-Based Access Control (RBAC) in a Node.js API to man
 
 1. **Clone the repository**:
    ```bash
-   git clone <repository_url>
-   cd <repository_directory>
+   git clone <https://github.com/Safi198/4th-Assignment-Social-Swirl-Backend>
    ```
 
 2. **Install dependencies**:
@@ -77,6 +77,23 @@ This project implements Role-Based Access Control (RBAC) in a Node.js API to man
   - `Authorization: Bearer <your_jwt_token>`
 - **Description**: Retrieves a list of all users. This endpoint is accessible only to users with the `admin` role.
 
+## API Documentation
+
+The API documentation is available through Swagger.
+
+1. **Access the Swagger documentation**:
+   Open your web browser and navigate to [http://localhost:3000/api-docs](http://localhost:3000/api-docs).
+
+2. **Authorize Using Bearer Token**:
+   - Click on the "Authorize" button at the top right.
+   - Enter `Bearer <your_jwt_token>` in the authorization field (replace `<your_jwt_token>` with the token obtained from the login response).
+
+3. **Explore the Endpoints**:
+   - Find the `/admin/users` endpoint in the Swagger UI.
+   - Click on it to expand the details.
+   - Click the "Try it out" button.
+   - Click "Execute" to see the list of users.
+
 ## Testing
 
 Use [Postman](https://www.postman.com/) or any other API testing tool to test the endpoints.
@@ -105,3 +122,15 @@ Use [Postman](https://www.postman.com/) or any other API testing tool to test th
   - `auth.js`: Routes for authentication (register, login).
   - `admin.js`: Routes for admin-specific actions.
 - `index.js`: Main entry point for the application.
+- `swaggerConfig.js`: Swagger configuration file.
+
+## Environment Variables
+
+Make sure to configure the following environment variables in your `.env` file:
+
+```
+PORT=3000
+MONGO_URI=mongodb://127.0.0.1:27017/Swirltask
+SECRET_KEY=my_secret_key
+```
+```
