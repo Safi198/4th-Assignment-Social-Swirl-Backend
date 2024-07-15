@@ -3,6 +3,8 @@ const jwtoken = require("jsonwebtoken");
 require("dotenv").config();
 
 const user = require("../models/user");
+const ValidationError = require("../errors/ValidationError");
+const NotFoundError = require("../errors/NotFoundError");
 
 
 /**
@@ -53,22 +55,18 @@ const user = require("../models/user");
  *       500:
  *         description: Internal server error
  */
-exports.register = async (req, res) => {
+exports.register = async (req, res,next) => {
     try {
         const { username, password, role } = req.body;
 
         if (!username || !password) {
-            return res
-                .status(400)
-                .json({ failureMessage: "Username and Password both are required!" });
+            throw new ValidationError("Username and Password both are required!");
         }
 
         const existingUser = await user.findOne({ username });
 
         if (existingUser) {
-            return res
-                .status(400)
-                .json({ success: "Username already register" });
+            throw new ValidationError("Username already registered");
         }
 
         const hashPassword = await bCrypt.hash(password, 10);
@@ -81,7 +79,7 @@ exports.register = async (req, res) => {
 
         res.status(200).json({ success: "User registered successfully", newUser });
     } catch (err) {
-        res.status(500).json({ message: "Internal server error", err: err.message });
+        next(err);
     }
 };
 
@@ -113,28 +111,24 @@ exports.register = async (req, res) => {
  *       500:
  *         description: Internal server error
  */
-exports.login = async (req, res) => {
+exports.login = async (req, res,next) => {
     try {
         const { username, password } = req.body;
 
         if (!username || !password) {
-            return res
-                .status(400)
-                .json({ failureMessage: "Username and password are required" });
+            throw new ValidationError("Username and password are required");
         }
 
         const uUser = await user.findOne({ username });
 
         if (!uUser) {
-            return res
-                .status(400)
-                .json({ failureMessage: "Invalid credentials" });
+            throw new ValidationError("Invalid credentials");
         }
 
         const isPasswordValid = await bCrypt.compare(password, uUser.password);
 
         if (!isPasswordValid) {
-            return res.status(400).json({ message: "Invalid credentials" });
+            throw new ValidationError("Invalid credentials");
         }
 
         const token = jwtoken.sign(
@@ -144,9 +138,6 @@ exports.login = async (req, res) => {
 
         res.status(200).json({ success: "Login Successfully", token: token });
     } catch (err) {
-        res.status(500).json({
-            message: "Internal server error",
-            err: err.message,
-        });
+        next(err);
     }
 };

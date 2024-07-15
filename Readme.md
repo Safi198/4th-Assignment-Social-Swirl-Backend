@@ -10,6 +10,8 @@ This project implements Role-Based Access Control (RBAC) in a Node.js API to man
 - User login with JWT authentication
 - Protected routes accessible only to users with specific roles
 - API documentation using Swagger
+- Comprehensive error handling with custom error classes
+- Logging of requests and errors using Winston
 
 ## Prerequisites
 
@@ -94,6 +96,24 @@ The API documentation is available through Swagger.
    - Click the "Try it out" button.
    - Click "Execute" to see the list of users.
 
+## Error Handling and Logging
+
+### Error Handling
+
+Custom error classes are used for handling common errors like validation errors and not found errors. These are defined in the `errors` directory:
+
+- `ValidationError`: Thrown for validation errors.
+- `NotFoundError`: Thrown for not found errors.
+
+A centralized error-handling middleware captures and logs errors before sending a response to the client.
+
+### Logging
+
+The Winston library is used for logging requests and errors. The logging configuration is defined in `utils/logger.js`.
+
+- Logs all incoming requests.
+- Logs errors with detailed information including stack traces.
+
 ## Testing
 
 Use [Postman](https://www.postman.com/) or any other API testing tool to test the endpoints.
@@ -113,14 +133,20 @@ Use [Postman](https://www.postman.com/) or any other API testing tool to test th
 
 - `controllers/`
   - `authController.js`: Handles user registration and login.
+- `errors/`
+  - `NotFoundError.js`: Custom error class for not found errors.
+  - `ValidationError.js`: Custom error class for validation errors.
 - `middleware/`
   - `authenticate.js`: JWT authentication middleware.
   - `roleMiddleware.js`: Middleware to check user roles.
+  - `errorHandler.js`: Centralized error-handling middleware.
 - `models/`
   - `user.js`: Mongoose model for the User schema.
 - `routes/`
   - `auth.js`: Routes for authentication (register, login).
   - `admin.js`: Routes for admin-specific actions.
+- `utils/`
+  - `logger.js`: Winston logging configuration.
 - `index.js`: Main entry point for the application.
 - `swaggerConfig.js`: Swagger configuration file.
 
@@ -132,5 +158,4 @@ Make sure to configure the following environment variables in your `.env` file:
 PORT=3000
 MONGO_URI=mongodb://127.0.0.1:27017/Swirltask
 SECRET_KEY=my_secret_key
-```
 ```

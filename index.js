@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 require("dotenv").config();
 const { swaggerUi, swaggerSpec } = require("./swaggerConfig");
+const logger = require("./utils/logger");
+const errorHandler = require("./middleware/errorHandler");
 
 const authRoutes = require("./routes/auth");
 const adminRoutes = require("./routes/admin");
@@ -12,10 +14,17 @@ const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
+app.use((req, res, next) => {
+    logger.info(`Incomming request: ${req.method} ${req.url}`);
+    next();
+});
+
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/auth", authRoutes);
 app.use("/admin", adminRoutes);
+app.use(errorHandler);
+
 app.get("/", (req, res) => {
     res.send("Server is running");
 });
@@ -23,11 +32,11 @@ app.get("/", (req, res) => {
 mongoose
     .connect(process.env.MONGO_URI)
     .then(() => {
-        console.log("Connected to MongoDB");
+        logger.info("Connected to MongoDB");
         app.listen(port, () => {
-            console.log(`Server running on port ${port}`);
+            logger.info(`Server running on port ${port}`);
         });
     })
     .catch((err) => {
-        console.error("Failed to connect to MongoDB", err);
+        logger.error("Failed to connect to MongoDB", err);
     });
