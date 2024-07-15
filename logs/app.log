@@ -1,3 +1,37 @@
-2024-07-15T11:24:38.027Z [error]: undefined 
-2024-07-15T11:25:25.571Z [error]: undefined 
-2024-07-15T11:26:19.954Z [error]: undefined 
+2024-07-15T17:20:23.737Z [info]: Connected to MongoDB 
+2024-07-15T17:20:23.743Z [info]: Server running on port 3000 
+2024-07-15T17:20:47.174Z [info]: Incomming request: GET / 
+2024-07-15T17:20:55.776Z [info]: Incomming request: GET /auth/register 
+2024-07-15T17:21:00.581Z [info]: Incomming request: POST /auth/register 
+2024-07-15T17:21:16.472Z [info]: Incomming request: POST /auth/register 
+2024-07-15T17:21:23.010Z [info]: Incomming request: POST /auth/register 
+2024-07-15T17:22:02.601Z [info]: Incomming request: POST /auth/register 
+2024-07-15T17:22:02.603Z [error]: Username and Password both are required! 
+2024-07-15T17:22:37.956Z [info]: Incomming request: POST /auth/login 
+2024-07-15T17:22:37.958Z [error]: Username and password are required 
+2024-07-15T17:23:01.903Z [info]: Incomming request: POST /auth/login 
+2024-07-15T17:23:26.050Z [info]: Incomming request: POST /auth/login 
+2024-07-15T17:23:26.167Z [error]: Invalid credentials 
+2024-07-15T17:23:39.507Z [info]: Incomming request: POST /auth/login 
+2024-07-15T17:23:39.623Z [error]: Invalid credentials 
+2024-07-15T17:23:43.570Z [info]: Incomming request: POST /auth/login 
+2024-07-15T17:24:19.415Z [info]: Incomming request: GET /admin/users 
+2024-07-15T17:24:28.927Z [info]: Incomming request: GET /admin/users 
+2024-07-15T17:24:47.671Z [info]: Incomming request: POST /auth/login 
+2024-07-15T17:25:01.559Z [info]: Incomming request: GET /admin 
+2024-07-15T17:25:10.737Z [info]: Incomming request: GET /admin/users 
+2024-07-15T17:26:12.392Z [info]: Incomming request: GET /api-docs/ 
+2024-07-15T17:26:12.450Z [info]: Incomming request: GET /api-docs/swagger-ui.css 
+2024-07-15T17:26:12.453Z [info]: Incomming request: GET /api-docs/swagger-ui-bundle.js 
+2024-07-15T17:26:12.458Z [info]: Incomming request: GET /api-docs/swagger-ui-standalone-preset.js 
+2024-07-15T17:26:12.462Z [info]: Incomming request: GET /api-docs/swagger-ui-init.js 
+2024-07-15T17:26:13.789Z [info]: Incomming request: GET /api-docs/favicon-32x32.png 
+2024-07-15T17:26:27.831Z [info]: Incomming request: POST /auth/login 
+2024-07-15T17:26:27.832Z [error]: Username and password are required 
+2024-07-15T17:26:40.782Z [info]: Incomming request: GET /api-docs/swagger-ui.css 
+2024-07-15T17:26:41.678Z [info]: Incomming request: GET /api-docs/swagger-ui.css.map 
+2024-07-15T17:26:47.625Z [info]: Incomming request: POST /auth/login 
+2024-07-15T17:26:47.626Z [error]: Username and password are required 
+2024-07-15T17:27:14.422Z [info]: Incomming request: POST /auth/login 
+2024-07-15T17:27:14.546Z [error]: Invalid credentials 
+2024-07-15T17:27:23.750Z [info]: Incomming request: POST /auth/login 

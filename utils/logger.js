@@ -4,8 +4,8 @@ const logger = createLogger({
     level: "info",
     format: format.combine(
         format.timestamp(),
-        format.printf(({ timestamp, level, msg, meta }) => {
-            return `${timestamp} [${level}]: ${msg} ${
+        format.printf(({ timestamp, level, message, meta }) => {
+            return `${timestamp} [${level}]: ${message} ${
                 meta ? JSON.stringify(meta) : ""
             }`;
         })
